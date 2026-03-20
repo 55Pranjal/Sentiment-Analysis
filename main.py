@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from textblob import TextBlob
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
 
 app = FastAPI()
 
@@ -18,8 +19,8 @@ class InputText(BaseModel):
     text: str
 
 @app.get("/")
-def home():
-    return {"message": "API is running 🚀"}
+def serve_frontend():
+    return FileResponse("index.html")
 
 @app.post("/predict")
 def predict(data: InputText):
